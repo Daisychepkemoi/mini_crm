@@ -15,11 +15,17 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('companies');
+            $table->string('company_id');//website/name/email/id
+            $table->string('email');//website/name/email/id
+            $table->integer('phone');//website/name/email/id
             $table->timestamps();
         });
     }
 
-    /**
+    /**First name (required), last name (required), Company (foreign key to Companies), email, phone
      * Reverse the migrations.
      *
      * @return void

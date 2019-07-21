@@ -17,10 +17,10 @@ class CreateEmployeesTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('companies');
+            // $table->string('companies');
             $table->string('company_id');//website/name/email/id
             $table->string('email');//website/name/email/id
-            $table->integer('phone');//website/name/email/id
+            $table->string('phone');//website/name/email/id
             $table->timestamps();
         });
     }

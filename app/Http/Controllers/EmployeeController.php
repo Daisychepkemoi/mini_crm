@@ -20,28 +20,22 @@ class EmployeeController extends Controller
     public function index()
     {
 
-        $employees = Employee::paginate();
-        $companies = Company::get();
+        $employees = Employee::latest()->paginate(10);
+        $companies = Company::latest()->get();
         // dd($employees);
         return view("employee.allemployees",compact('employees','companies'));
     }
     public function onecompanyemployees($id)
     {
 
-        $employees = Employee::where('company_id',$id)->paginate();
-         // $employees =DB::table('employees')
-            // ->join('companies', 'companies.id', '=', 'employees.company_id')
-            // ->select('employees.*', 'companies.id')
-            // ->paginate();
+        $employees = Employee::where('company_id',$id)->latest()->paginate(10);
+      
         $company = Company::where('id',$id)->first();
-        // dd($employees);
         return view("employee.onecompanyemployees",compact('employees','company'));
     }
      public function editview( $id, $employee)
     {
-        // $company = Company::find($id);
         $oneemployee = Employee::find($employee);
-        // dd($id); 
         return view('employee.editemployee',compact('oneemployee')); 
     }
     public function saveedit($id,$employee)
@@ -65,7 +59,7 @@ class EmployeeController extends Controller
     
     public function create()
     {
-        $company = Company::get();
+        $company = Company::latest()->paginate(10);
 
         return view("employee.createemployee",compact('company'));
     }
@@ -104,43 +98,7 @@ class EmployeeController extends Controller
     
     }
 
-}    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-   
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
+}   
     public function destroy($id, $employee)
     {
            DB::table('employees')->where('id', $employee)->delete(); 

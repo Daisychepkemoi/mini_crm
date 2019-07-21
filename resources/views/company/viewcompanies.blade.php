@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create Company</title>
-</head>
-<body>
-	<header>
-		<nav>
-      <h2><a href="/home">Home</a></h2>
-			<h1>Create Company website</h1>
-		</nav>
-	</header>
+@extends('layouts.app')
+
+@section('content')
 	<div>
 		<div>
 			 <div class="panel-body">
-        <div>
-          <a href="createcompany">Add  company</a>
+        <div style="margin-left: 12.5%;">
+      <a href="/createcompany" style="margin-top: 15px;"><h4>Create Company</h4></a>
         </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="width:75%;margin-left: 12.5%;margin-top: 20px;">
                  
                      <thead>
                         <tr class="bg-success">
@@ -26,7 +17,7 @@
                           <th scope="col">Company Email</th>
                           <th scope="col">Company Website</th>
                           <th scope="col"> Company Logo</th>
-                          <th scope="col-2">Modify</th>
+                          <th colspan="3">Modify</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -58,5 +49,5 @@
 		</div>
 
 	</div>
-</body>
-</html>
+
+@endsection

@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create Company</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
 	<header>
 		<nav>
 			<h1> AllEmployees on all Regions Company</h1>
@@ -12,7 +9,7 @@
 	<div>
 		<div>
 			<div>
-			<h3><button style="float: left;">List Of Employees</button> <a href="" style="float: right"><button >Add Employees</button></a></h3>
+			<h3><button style="float: left;">Lisut Of Employees</button> <a href="" style="float: right"><button >Add Employees</button></a></h3>
 			</div>
 			 <div class="panel-body">
                 <table class="table table-bordered">
@@ -56,5 +53,4 @@
 		</div>
 
 	</div>
-</body>
-</html>
+@endsection

@@ -12,6 +12,9 @@ use DB;
 use App\Mail\NewCompany;
 use App\Mail\RegisterReply;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 
 class CompanyController extends Controller
@@ -29,18 +32,22 @@ class CompanyController extends Controller
     }
     public function store(Request $request)
     {
+
+
+
+
         $user= auth()->user();
         $users =$user->id;
         $logo = $request->file('logo');
         //get file extension. I.e png or jpeg etc
-        // $extension = $logo->getClientOriginalExtension();
+        $extension = $logo->getClientOriginalExtension();
         //store the image in public folder then get the file name and extension of the logo
-        // Storage::disk('public')->put($logo->getFilename().'.'.$extension, File::get($logo));
+        Storage::disk('public')->put($logo->getFilename().'.'.$extension, File::get($logo));
 
         // $admin = User::where('id',20)->first();
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:companies|max:120',
-            // 'logo' => 'required',
+            'logo' => 'required',
             'email' => 'required|email|unique:companies',
           'website' => 'required|string|unique:companies',
 
@@ -54,7 +61,7 @@ class CompanyController extends Controller
         $company = new Company;
             $company->name = $request->name;
             $company->email = $request->email;
-            // $company->logo = $logo->getFilename().'.'.$extension;
+            $company->logo = $logo->getFilename().'.'.$extension;
             $company->website = $request->website;
             $company->save();
         // Mail::send(new NewCompany($company));
@@ -78,17 +85,22 @@ class CompanyController extends Controller
          $company = Company::find($id);
          // dd($company);
          // $company/->name = $request->get('company_name');
+         $logo = $request->file('logo');
+        //get file extension. I.e png or jpeg etc
+        $extension = $logo->getClientOriginalExtension();
+        //store the image in public folder then get the file name and extension of the logo
+        Storage::disk('public')->put($logo->getFilename().'.'.$extension, File::get($logo));
         $company->name = request('company_name');
         $company->email = request('company_email');
         $company->website = request('company_website');
-        $company->logo = request('logo');
+        $company->logo = $logo->getFilename().'.'.$extension;;
         $company->save();
         // dd($company->name); //find out eloquent way of editing
         return redirect('/companies')->with('success', 'Company details editred successfully');
     }
      public function viewcompanies(Request $request)
     {
-        $companies = Company::paginate();
+        $companies = Company::latest()->paginate(10);
         // dd($companies);
         return view('company.viewcompanies',compact('companies'));
     }

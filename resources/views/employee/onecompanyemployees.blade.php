@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create Company</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
 	<header>
 		<nav>
 			<h1> {{$company->name}} company Employees</h1>
@@ -18,14 +15,13 @@
                      <thead>
                         <tr class="bg-success">
                        {{-- First name (required), last name (required), Company (foreign key to Companies), email, phone- DONE                          <th scope="col">Employee Name</th> --}}
-                          <th scope="col"> ID</th>
-                          <th scope="col"> Comany ID</th>
+                          
                           <th scope="col">Employee Name</th>
                           <th scope="col">Employee Email</th>
                           <th scope="col">Employee Phone_No</th>
                           <th scope="col">Company</th>
                           
-                          <th scope="col-3">Modify</th>
+                          <th colspan="2">Modify</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -33,8 +29,7 @@
           
                           @foreach($employees as $employee)
                        <tr>
-                        <td>{{$employee->id}}</td>
-                        <td>{{$employee->company_id}}</td>
+                       
                         <td>{{$employee->first_name}}  {{$employee->last_name}}</td>
                         <td>{{$employee->email}}</td>
                         <td>{{$employee->phone}}</td>
@@ -58,5 +53,4 @@
 		</div>
 
 	</div>
-</body>
-</html>
+@endsection

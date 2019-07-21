@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create Company</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
 	<header>
 		<nav>
 			<h1> All company Employees for all regions</h1>
@@ -21,20 +18,19 @@
                           <th scope="col">Employee Name</th>
                           <th scope="col">Employee Email</th>
                           <th scope="col">Employee Phone_No</th>
-                          <th scope="col">Company</th>
+                          {{-- <th colspan="2">Company</th> --}}
                           
-                          <th scope="col-3">Modify</th>
+                          <th colspan="2">Modify</th>
                         </tr>
                       </thead>
                       <tbody>
                       @foreach($employees as $employee)
                        <tr>
                         {{-- <td>{{$tean->id}}</td> --}}
-                        <td>{{$employee->name}}</td>
+                        <td>{{$employee->first_name}}  {{$employee->last_name}}</td>
                         <td>{{$employee->email}}</td>
-                        <td>{{$employee->website}}</td>
-                        <td>{{$employee->logo}}</td>
-                        <td>company</td>
+                        <td>{{$employee->phone}}</td>
+                        {{-- <td>{{$employee->company}}</td> --}}
                         {{-- <td><a href="employee/{{$employee->id}}"><button>View Details</button></a></td> --}}
                          <td><a href="/company/{{$employee->company_id}}/employees/{{$employee->id}}/editview"><button>Edit Details</button></a></td>
                         <td><a href="/company/{{$employee->company_id}}/employees/{{$employee->id}}/delete"><button>Delete</button></a></td>
@@ -55,5 +51,4 @@
 		</div>
 
 	</div>
-</body>
-</html>
+@endsection>
